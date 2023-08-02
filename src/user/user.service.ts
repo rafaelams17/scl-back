@@ -24,7 +24,7 @@ export class UserService {
     };
   }
   // token -> d0e41894215d0ac7f21f0637cb2c2f80
-  findByEmail(email: string) {
+  async findByEmail(email: string) {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
@@ -33,8 +33,10 @@ export class UserService {
     return this.prisma.user.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return this.prisma.user.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
