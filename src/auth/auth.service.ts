@@ -22,9 +22,11 @@ export class AuthService {
       name: user.name,
       email: user.email,
     };
+    const jwtToken = this.jwtService.sign(payload);
 
+    // console.log(jwtToken);
     return {
-      acess_token: this.jwtService.sign(payload),
+      acess_token: jwtToken,
     };
   }
 
