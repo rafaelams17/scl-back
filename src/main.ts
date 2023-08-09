@@ -13,6 +13,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  await app.listen(3000);
+  app.enableCors(); // liberar acesso externo para api
+  await app.listen(3000); // a porta do navegador que está disponível para testes
 }
 bootstrap();

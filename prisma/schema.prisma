@@ -13,3 +13,14 @@ model User {
   email String @unique // garante que o email é único
   password String
 }
+
+model Book {
+  id Int @id @default(autoincrement())
+  titulo String
+  autor String 
+  quantPage String 
+  sinopse String
+  editora String
+  anoPublicacao Int
+  image String
+}
