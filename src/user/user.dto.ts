@@ -1,4 +1,3 @@
-import { User } from '../entities/user.entity';
 import {
   IsEmail,
   IsString,
@@ -7,7 +6,12 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class CreateUserDto extends User {
+export class UserDTO {
+  id?: number;
+
+  @IsString()
+  name: string;
+
   @IsEmail()
   email: string;
 
@@ -18,7 +22,4 @@ export class CreateUserDto extends User {
     message: 'password too weak',
   })
   password: string;
-
-  @IsString()
-  name: string;
 }

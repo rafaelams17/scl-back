@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { User } from 'src/user/entities/user.entity';
+import { UserDTO } from 'src/user/user.dto';
 import { UserService } from 'src/user/user.service';
 import { UserLoad } from './models/UserLoad';
 import { UserToken } from './models/UserToken';
@@ -15,7 +15,7 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  async login(user: User): Promise<UserToken> {
+  async login(user: UserDTO): Promise<UserToken> {
     // Transformar o user em um JWT
     const payload: UserLoad = {
       id: user.id,

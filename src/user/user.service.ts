@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
+import { UserDTO } from './user.dto';
+
 // import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
@@ -11,12 +11,12 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   // cria um usuário
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUser: UserDTO): Promise<UserDTO> {
     // verificar se o usuário já foi criado
     const emailExists = await this.prisma.user.findFirst({
-      // procure um usuário onde o email é igual ao createUserDto.cpf
+      // procure um usuário onde o email é igual ao createUser.cpf
       where: {
-        email: createUserDto.email,
+        email: createUser.email,
       },
     });
 
@@ -27,8 +27,8 @@ export class UserService {
 
     // criptografar a senha
     const data: Prisma.UserCreateInput = {
-      ...createUserDto,
-      password: await bcrypt.hash(createUserDto.password, 10),
+      ...createUser,
+      password: await bcrypt.hash(createUser.password, 10),
     };
 
     // se o email não existir o usuário é salvo no banco
