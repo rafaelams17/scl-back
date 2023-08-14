@@ -21,6 +21,6 @@ model Book {
   quantPage Int 
   sinopse String
   editora String
-  anoPublicacao DateTime
+  dataPublicacao DateTime
   image String
 }

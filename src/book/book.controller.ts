@@ -9,11 +9,13 @@ import {
 } from '@nestjs/common';
 import { BookDTO } from './book.dto';
 import { BookService } from './book.service';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 
+  @IsPublic()
   @Post()
   async create(@Body() data: BookDTO) {
     return this.bookService.create(data);

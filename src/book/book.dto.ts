@@ -17,8 +17,8 @@ export class BookDTO {
   editora: string;
 
   @IsNotEmpty()
-  anoPublicacao: Date;
+  dataPublicacao: Date; // "2023-08-14T23:59:00Z"
 
-  @IsString()
+  @IsNotEmpty()
   image: string;
 }

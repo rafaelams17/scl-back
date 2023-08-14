@@ -9,6 +9,6 @@ import { BookModule } from './book/book.module';
 @Module({
   imports: [PrismaModule, UserModule, AuthModule, BookModule],
   controllers: [],
-  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
+  providers: [],
 })
 export class AppModule {}
