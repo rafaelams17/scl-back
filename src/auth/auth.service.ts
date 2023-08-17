@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
-import { UserDTO } from 'src/user/user.dto';
-import { UserService } from 'src/user/user.service';
-import { UserLoad } from './models/UserLoad';
-import { UserToken } from './models/UserToken';
+import * as bcrypt from 'bcrypt';
 import { UnauthorizedError } from './error/unauthorized.error';
+import { User } from 'src/module/user/entities/user.entity';
+import { UserService } from 'src/module/user/user.service';
+import { UserPlayload } from './models/UserPlayload';
+import { UserToken } from './models/UserToken';
 
 @Injectable()
 export class AuthService {
@@ -15,40 +15,38 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  async login(user: UserDTO): Promise<UserToken> {
+  async login(user: User): Promise<UserToken> {
     // Transformar o user em um JWT
-    const payload: UserLoad = {
-      id: user.id,
+    const payload: UserPlayload = {
+      sub: user.id,
       name: user.name,
       email: user.email,
     };
-    const jwtToken = this.jwtService.sign(payload);
 
-    // console.log(jwtToken);
     return {
-      acess_token: jwtToken,
+      acess_token: this.jwtService.sign(payload),
     };
   }
 
-  async validateUser(email: string, password: string) {
+  async validateUser(email: string, password: string): Promise<User> {
     const user = await this.userService.findByEmail(email);
 
     if (user) {
       // verificar a senha informada com a hash que está no banco
-      const isPasswordValid = await this.bcrypt.compare(
-        password,
-        user.password,
-      );
+      const isPasswordValid = await bcrypt.compare(password, user.password);
 
-      if (isPasswordValid) {
+      // console.log(isPasswordValid);
+      if (!isPasswordValid) {
+        throw new HttpException(
+          'Email address or password provided is incorrect.',
+          HttpStatus.UNAUTHORIZED,
+        );
+      } else {
         return {
           ...user,
           password: undefined,
         };
       }
     }
-    throw new UnauthorizedError(
-      'Email address or password provided is incorrect.',
-    );
   }
 }

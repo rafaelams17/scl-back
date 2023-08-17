@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../database/prisma.service';
 import { UserDTO } from './user.dto';
+import { User } from './entities/user.entity';
 
 // import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -11,7 +12,7 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   // cria um usuário
-  async create(createUser: UserDTO): Promise<UserDTO> {
+  async create(createUser: UserDTO): Promise<User> {
     // verificar se o usuário já foi criado
     const emailExists = await this.prisma.user.findFirst({
       // procure um usuário onde o email é igual ao createUser.cpf
