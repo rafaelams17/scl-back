@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UnauthorizedError } from './error/unauthorized.error';
@@ -25,28 +25,30 @@ export class AuthService {
 
     return {
       acess_token: this.jwtService.sign(payload),
+      id_user: user.id,
     };
   }
 
   async validateUser(email: string, password: string): Promise<User> {
-    const user = await this.userService.findByEmail(email);
+    try {
+      const user = await this.userService.findByEmail(email);
 
-    if (user) {
-      // verificar a senha informada com a hash que está no banco
-      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (user) {
+        // verificar a senha informada com a hash que está no banco
+        const isPasswordValid = await bcrypt.compare(password, user.password);
 
-      // console.log(isPasswordValid);
-      if (!isPasswordValid) {
-        throw new HttpException(
-          'Email address or password provided is incorrect.',
-          HttpStatus.UNAUTHORIZED,
-        );
-      } else {
-        return {
-          ...user,
-          password: undefined,
-        };
+        if (isPasswordValid) {
+          return {
+            ...user,
+            password: undefined,
+          };
+        }
       }
+    } catch (error) {
+      console.log('HTTP status code:', error.response.status);
+      throw new UnauthorizedError(
+        'Email address or password provided is incorrect.',
+      );
     }
   }
 }

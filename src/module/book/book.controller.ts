@@ -16,17 +16,28 @@ export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @IsPublic()
-  @Post()
+  @Post() // criar
   async create(@Body() data: BookDTO) {
     return this.bookService.create(data);
   }
 
-  @Get()
+  @IsPublic()
+  @Get() // pegar todos
   async findAll() {
     return this.bookService.findAll();
   }
 
-  // http://localhost:3000/238498239472934
+  @IsPublic()
+  @Get('unico/:id') // pegar um
+  async findOne(@Param('id') id: number) {
+    return this.bookService.findOne(id);
+  }
+
+  @Get('total/') // qauntidade de livros
+  async totalModulos() {
+    return this.bookService.totalBooks();
+  }
+
   @Put(':id')
   async update(@Param('id') id: number, @Body() data: BookDTO) {
     return this.bookService.update(id, data);

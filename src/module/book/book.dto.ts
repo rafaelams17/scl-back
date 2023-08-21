@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class BookDTO {
   @IsString()
@@ -19,6 +19,9 @@ export class BookDTO {
   @IsNotEmpty()
   dataPublicacao: Date; // "2023-08-14T23:59:00Z"
 
-  @IsNotEmpty()
+  @IsOptional()
   image: string;
+
+  @IsNumber()
+  id_user: number;
 }

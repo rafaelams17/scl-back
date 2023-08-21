@@ -6,10 +6,14 @@ import { BookDTO } from './book.dto';
 export class BookService {
   constructor(private prisma: PrismaService) {}
 
+  // cria um livro
   async create(data: BookDTO) {
+    // verifica se o livro já foi criado
     const bookExists = await this.prisma.book.findFirst({
+      // verifica pelo tiyulo e o id do usuario
       where: {
         titulo: data.titulo,
+        id_user: data.id_user,
       },
     });
 
@@ -18,7 +22,16 @@ export class BookService {
     }
 
     const book = await this.prisma.book.create({
-      data,
+      data: {
+        autor: data.autor,
+        dataPublicacao: new Date(data.dataPublicacao),
+        editora: data.editora,
+        image: data.image,
+        quantPage: data.quantPage,
+        sinopse: data.sinopse,
+        titulo: data.titulo,
+        user: { connect: { id: data.id_user } },
+      },
     });
 
     return book;
@@ -28,6 +41,21 @@ export class BookService {
     return this.prisma.book.findMany();
   }
 
+  async findOne(id: number) {
+    console.log('Cheguei aquii');
+    return this.prisma.book.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  // somar a quantidade de livros cadastrados
+  async totalBooks() {
+    return this.prisma.book.count();
+  }
+
+  // atualiza os dados do livro
   async update(id: number, data: BookDTO) {
     const bookExists = await this.prisma.book.findUnique({
       where: {
@@ -47,6 +75,7 @@ export class BookService {
     });
   }
 
+  // deletar um livro
   async delete(id: number) {
     const bookExists = await this.prisma.book.findUnique({
       where: {
