@@ -13,7 +13,6 @@ export class BookService {
       // verifica pelo tiyulo e o id do usuario
       where: {
         titulo: data.titulo,
-        id_user: data.id_user,
       },
     });
 
@@ -22,16 +21,7 @@ export class BookService {
     }
 
     const book = await this.prisma.book.create({
-      data: {
-        autor: data.autor,
-        dataPublicacao: new Date(data.dataPublicacao),
-        editora: data.editora,
-        image: data.image,
-        quantPage: data.quantPage,
-        sinopse: data.sinopse,
-        titulo: data.titulo,
-        user: { connect: { id: data.id_user } },
-      },
+      data,
     });
 
     return book;

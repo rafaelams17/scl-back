@@ -17,11 +17,11 @@ export class BookDTO {
   editora: string;
 
   @IsNotEmpty()
-  dataPublicacao: Date; // "2023-08-14T23:59:00Z"
+  dataPublicacao: string; // "2023-08-14T23:59:00Z"
 
   @IsOptional()
   image: string;
 
-  @IsNumber()
-  id_user: number;
+  // @IsNumber()
+  // id_user: number;
 }

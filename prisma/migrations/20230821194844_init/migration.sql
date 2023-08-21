@@ -16,8 +16,8 @@ CREATE TABLE "Book" (
     "quantPage" INTEGER NOT NULL,
     "sinopse" TEXT NOT NULL,
     "editora" TEXT NOT NULL,
-    "dataPublicacao" TIMESTAMP(3) NOT NULL,
-    "image" TEXT NOT NULL,
+    "dataPublicacao" TEXT NOT NULL,
+    "image" TEXT,
 
     CONSTRAINT "Book_pkey" PRIMARY KEY ("id")
 );

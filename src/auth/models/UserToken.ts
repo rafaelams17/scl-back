@@ -1,4 +1,4 @@
 export interface UserToken {
   acess_token: string;
-  id_user: number;
+  // id_user: number;
 }
