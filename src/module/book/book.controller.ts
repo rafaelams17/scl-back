@@ -16,34 +16,34 @@ export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @IsPublic()
-  @Post() // criar
+  @Post() // rota para criar o livro
   async create(@Body() data: BookDTO) {
     return this.bookService.create(data);
   }
 
   @IsPublic()
-  @Get() // pegar todos
+  @Get() // rota para pegar todos os livros cadastrados
   async findAll() {
     return this.bookService.findAll();
   }
 
   @IsPublic()
-  @Get('unico/:id') // pegar um
+  @Get('unico/:id') // rota para pegar um livro
   async findOne(@Param('id') id: number) {
     return this.bookService.findOne(id);
   }
 
-  @Get('total/') // qauntidade de livros
+  @Get('total/') // rota para pegar a quantidade de livros cadastrados
   async totalModulos() {
     return this.bookService.totalBooks();
   }
 
-  @Put(':id')
+  @Put(':id') // rota para atualizar um livro
   async update(@Param('id') id: number, @Body() data: BookDTO) {
     return this.bookService.update(id, data);
   }
 
-  @Delete(':id')
+  @Delete(':id') // rota para deletar um livro
   async delete(@Param('id') id: number) {
     return this.bookService.delete(id);
   }
