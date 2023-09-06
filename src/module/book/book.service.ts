@@ -10,9 +10,10 @@ export class BookService {
   async create(data: BookDTO) {
     // verifica se o livro já foi criado
     const bookExists = await this.prisma.book.findFirst({
-      // verifica pelo tiyulo e o id do usuario
+      // procure um book onde o titulo do livro é igual ao titulo do livro que está no bd
       where: {
         titulo: data.titulo,
+        id_user: data.id,
       },
     });
 
@@ -20,10 +21,28 @@ export class BookService {
       throw new Error('The Book already exists!');
     }
 
-    const book = await this.prisma.book.create({
-      data,
-    });
+    // Data inicial e final recebida informada pelo usuário
+    const data_i = data.data_inicial;
+    const data_f = data.data_fim;
 
+    // Converta as strings em objetos DateTime
+    const dataInicial = new Date(data_i);
+    const dataFinal = new Date(data_f);
+
+    // Crie o livro usando as datas convertidas
+    const book = await this.prisma.book.create({
+      data: {
+        titulo: data.titulo,
+        autor: data.autor,
+        quantPage: data.quantPage,
+        genero: data.genero,
+        data_inicial: dataInicial,
+        leitura_atual: data.leitura_atual,
+        data_fim: dataFinal,
+        id_user: data.id,
+      },
+    });
+    console.log(book);
     return book;
   }
 

@@ -14,10 +14,10 @@ CREATE TABLE "Book" (
     "titulo" TEXT NOT NULL,
     "autor" TEXT NOT NULL,
     "quantPage" INTEGER NOT NULL,
-    "sinopse" TEXT NOT NULL,
-    "editora" TEXT NOT NULL,
-    "dataPublicacao" TEXT NOT NULL,
-    "image" TEXT,
+    "genero" TEXT NOT NULL,
+    "data_inicial" TIMESTAMP(3) NOT NULL,
+    "leitura_atual" BOOLEAN NOT NULL,
+    "data_fim" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Book_pkey" PRIMARY KEY ("id")
 );
