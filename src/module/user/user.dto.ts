@@ -1,3 +1,4 @@
+import { Book } from '@prisma/client';
 import { User } from '../user/entities/user.entity';
 import {
   IsEmail,
@@ -21,4 +22,6 @@ export class UserDTO extends User {
     message: 'password too weak',
   })
   password: string;
+
+  books?: Book[];
 }

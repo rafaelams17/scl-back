@@ -23,14 +23,14 @@ export class BookDTO {
   genero: string;
 
   @IsDateString()
-  data_inicial: Date; // "2023-08-14T23:59:00Z"
+  data_inicial: string; // "2023-08-14T23:59:00Z"
 
   @IsBoolean()
   leitura_atual: boolean;
 
   @IsDateString()
-  data_fim: Date; // "2023-08-14T23:59:00Z"
+  data_fim: string; // "2023-08-14T23:59:00Z"
 
   @IsNumber()
-  id_user: number;
+  id_user?: number;
 }

@@ -13,7 +13,7 @@ export class BookService {
       // procure um book onde o titulo do livro é igual ao titulo do livro que está no bd
       where: {
         titulo: data.titulo,
-        id_user: data.id,
+        // id: data.id_user,
       },
     });
 
@@ -22,12 +22,17 @@ export class BookService {
     }
 
     // Data inicial e final recebida informada pelo usuário
-    const data_i = data.data_inicial;
-    const data_f = data.data_fim;
-
     // Converta as strings em objetos DateTime
-    const dataInicial = new Date(data_i);
-    const dataFinal = new Date(data_f);
+    const data_i = new Date(data.data_inicial);
+    const data_f = new Date(data.data_fim);
+
+    // Formatar as datas
+    const dataFormatadaInicial =
+      // eslint-disable-next-line prettier/prettier
+      data_i.getDate() + '/' + (data_i.getMonth() + 1) + '/' + data_i.getFullYear();
+    const dataFormatadaFinal =
+      // eslint-disable-next-line prettier/prettier
+      data_f.getDate() + '/' + (data_f.getMonth() + 1) + '/' + data_f.getFullYear();
 
     // Crie o livro usando as datas convertidas
     const book = await this.prisma.book.create({
@@ -36,12 +41,13 @@ export class BookService {
         autor: data.autor,
         quantPage: data.quantPage,
         genero: data.genero,
-        data_inicial: dataInicial,
+        data_inicial: dataFormatadaInicial,
         leitura_atual: data.leitura_atual,
-        data_fim: dataFinal,
-        id_user: data.id,
+        data_fim: dataFormatadaFinal,
+        // id_user: data.id_user,
       },
     });
+
     console.log(book);
     return book;
   }
