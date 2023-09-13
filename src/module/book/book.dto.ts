@@ -1,10 +1,4 @@
-import {
-  IsBoolean,
-  IsDateString,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class BookDTO {
   @IsOptional()
@@ -13,24 +7,21 @@ export class BookDTO {
   @IsString()
   titulo: string;
 
-  @IsString()
+  @IsOptional()
   autor: string;
 
-  @IsNumber()
+  @IsOptional()
   quantPage: number;
 
-  @IsString()
+  @IsOptional()
   genero: string;
 
-  @IsDateString()
+  @IsOptional()
   data_inicial: string; // "2023-08-14T23:59:00Z"
 
-  @IsBoolean()
-  leitura_atual: boolean;
-
-  @IsDateString()
+  @IsOptional()
   data_fim: string; // "2023-08-14T23:59:00Z"
 
-  @IsNumber()
+  @IsOptional()
   id_user?: number;
 }

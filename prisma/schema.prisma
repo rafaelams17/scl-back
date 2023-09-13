@@ -9,7 +9,7 @@ datasource db {
  
 model User {
   id Int @id @default(autoincrement())
-  name String
+  name String 
   email String @unique // garante que o email é único
   password String
 
@@ -19,12 +19,12 @@ model User {
 model Book {
   id Int @id @default(autoincrement())
   titulo String @unique
-  autor String 
-  quantPage Int 
-  genero String
-  data_inicial String
-  leitura_atual Boolean
-  data_fim String
+  autor String? // valores opcionais
+  quantPage Int? // valores opcionais 
+  genero String? // valores opcionais
+  data_inicial String? // valores opcionais
+  data_fim String? // valores opcionais
+
   // id_user Int?
 
   // user User? @relation(fields: [id_user], references: [id])

@@ -29,10 +29,18 @@ export class BookService {
     // Formatar as datas
     const dataFormatadaInicial =
       // eslint-disable-next-line prettier/prettier
-      data_i.getDate() + '/' + (data_i.getMonth() + 1) + '/' + data_i.getFullYear();
+      data_i.getDate() +
+      '/' +
+      (data_i.getMonth() + 1) +
+      '/' +
+      data_i.getFullYear();
     const dataFormatadaFinal =
       // eslint-disable-next-line prettier/prettier
-      data_f.getDate() + '/' + (data_f.getMonth() + 1) + '/' + data_f.getFullYear();
+      data_f.getDate() +
+      '/' +
+      (data_f.getMonth() + 1) +
+      '/' +
+      data_f.getFullYear();
 
     // Crie o livro usando as datas convertidas
     const book = await this.prisma.book.create({
@@ -41,9 +49,9 @@ export class BookService {
         autor: data.autor,
         quantPage: data.quantPage,
         genero: data.genero,
-        data_inicial: dataFormatadaInicial,
-        leitura_atual: data.leitura_atual,
-        data_fim: dataFormatadaFinal,
+        data_inicial:
+          dataFormatadaInicial == 'NaN/NaN/NaN' ? '' : dataFormatadaInicial,
+        data_fim: dataFormatadaFinal == 'NaN/NaN/NaN' ? '' : dataFormatadaFinal,
         // id_user: data.id_user,
       },
     });
