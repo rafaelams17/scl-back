@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Book" ALTER COLUMN "data_inicial" SET DATA TYPE TEXT,
-ALTER COLUMN "data_fim" SET DATA TYPE TEXT;

@@ -13,7 +13,7 @@ model User {
   email String @unique // garante que o email é único
   password String
 
-  // book Book[]
+  book Book[]
 }
 
 model Book {
@@ -23,9 +23,10 @@ model Book {
   quantPage Int? // valores opcionais 
   genero String? // valores opcionais
   data_inicial String? // valores opcionais
+  leitura_atual Boolean 
   data_fim String? // valores opcionais
 
-  // id_user Int?
+  id_user Int?
 
-  // user User? @relation(fields: [id_user], references: [id])
+  user User? @relation(fields: [id_user], references: [id])
 }

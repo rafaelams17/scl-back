@@ -51,6 +51,7 @@ export class BookService {
         genero: data.genero,
         data_inicial:
           dataFormatadaInicial == 'NaN/NaN/NaN' ? '' : dataFormatadaInicial,
+        leitura_atual: data.leitura_atual,
         data_fim: dataFormatadaFinal == 'NaN/NaN/NaN' ? '' : dataFormatadaFinal,
         // id_user: data.id_user,
       },

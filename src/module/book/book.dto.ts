@@ -20,6 +20,9 @@ export class BookDTO {
   data_inicial: string; // "2023-08-14T23:59:00Z"
 
   @IsOptional()
+  leitura_atual: boolean;
+
+  @IsOptional()
   data_fim: string; // "2023-08-14T23:59:00Z"
 
   @IsOptional()
