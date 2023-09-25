@@ -13,10 +13,11 @@ export class BookService {
       // procure um book onde o titulo do livro é igual ao titulo do livro que está no bd
       where: {
         titulo: data.titulo,
-        // id: data.id_user,
+        id_user: data.id_user,
       },
     });
 
+    console.log('dADOS DE DATA', data);
     if (bookExists) {
       throw new Error('The Book already exists!');
     }
@@ -24,7 +25,7 @@ export class BookService {
     // Data inicial e final recebida informada pelo usuário
     // Converta as strings em objetos DateTime
     const data_i = new Date(data.data_inicial);
-    const data_f = new Date(data.data_fim);
+    const data_f = new Date(data.data_final);
 
     // Formatar as datas
     const dataFormatadaInicial =
@@ -47,13 +48,14 @@ export class BookService {
       data: {
         titulo: data.titulo,
         autor: data.autor,
-        quantPage: data.quantPage,
-        genero: data.genero,
         data_inicial:
           dataFormatadaInicial == 'NaN/NaN/NaN' ? '' : dataFormatadaInicial,
-        leitura_atual: data.leitura_atual,
-        data_fim: dataFormatadaFinal == 'NaN/NaN/NaN' ? '' : dataFormatadaFinal,
-        // id_user: data.id_user,
+        leitura_atual: data.leitura_atual == null ? false : data.leitura_atual,
+        data_final:
+          dataFormatadaFinal == 'NaN/NaN/NaN' ? '' : dataFormatadaFinal,
+        status: data.status,
+        avaliacao: data.avaliacao,
+        id_user: data.id_user,
       },
     });
 

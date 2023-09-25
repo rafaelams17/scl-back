@@ -11,19 +11,19 @@ export class BookDTO {
   autor: string;
 
   @IsOptional()
-  quantPage: number;
-
-  @IsOptional()
-  genero: string;
-
-  @IsOptional()
   data_inicial: string; // "2023-08-14T23:59:00Z"
+
+  @IsOptional()
+  data_final: string; // "2023-08-14T23:59:00Z"
 
   @IsOptional()
   leitura_atual: boolean;
 
   @IsOptional()
-  data_fim: string; // "2023-08-14T23:59:00Z"
+  status: string;
+
+  @IsOptional()
+  avaliacao: string;
 
   @IsOptional()
   id_user?: number;
