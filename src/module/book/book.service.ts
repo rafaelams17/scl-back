@@ -53,8 +53,8 @@ export class BookService {
         leitura_atual: data.leitura_atual == null ? false : data.leitura_atual,
         data_final:
           dataFormatadaFinal == 'NaN/NaN/NaN' ? '' : dataFormatadaFinal,
-        status: data.status,
-        avaliacao: data.avaliacao,
+        status: data.status == null ? '-' : data.status,
+        avaliacao: data.avaliacao == null ? '-' : data.avaliacao,
         id_user: data.id_user,
       },
     });
