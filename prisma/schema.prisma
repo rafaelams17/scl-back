@@ -21,10 +21,11 @@ model Book {
   titulo        String  @unique
   autor         String? // valores opcionais
   data_inicial  String? // valores opcionais
+  quant_page    Int?    // valores opcionais
   data_final    String? // valores opcionais
   leitura_atual Boolean
   status        String? // valores opcionais
-  avaliacao     String? // valores opcionais
+  tipo          String? // valores opcionais
 
   id_user Int
 

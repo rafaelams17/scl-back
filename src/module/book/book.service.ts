@@ -17,7 +17,6 @@ export class BookService {
       },
     });
 
-    console.log('dADOS DE DATA', data);
     if (bookExists) {
       throw new Error('The Book already exists!');
     }
@@ -43,6 +42,14 @@ export class BookService {
       '/' +
       data_f.getFullYear();
 
+    // // verificar o status do livro do usuário
+    // Fazer essa função
+    // if(dataFormatadaInicial) {
+
+    // } else if() {
+
+    // }
+
     // Crie o livro usando as datas convertidas
     const book = await this.prisma.book.create({
       data: {
@@ -51,10 +58,11 @@ export class BookService {
         data_inicial:
           dataFormatadaInicial == 'NaN/NaN/NaN' ? '' : dataFormatadaInicial,
         leitura_atual: data.leitura_atual == null ? false : data.leitura_atual,
+        quant_page: data.quant_page,
         data_final:
           dataFormatadaFinal == 'NaN/NaN/NaN' ? '' : dataFormatadaFinal,
         status: data.status == null ? '-' : data.status,
-        avaliacao: data.avaliacao == null ? '-' : data.avaliacao,
+        tipo: data.tipo,
         id_user: data.id_user,
       },
     });

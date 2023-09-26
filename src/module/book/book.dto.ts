@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class BookDTO {
   @IsOptional()
@@ -9,6 +9,10 @@ export class BookDTO {
 
   @IsOptional()
   autor: string;
+
+  @IsNumber()
+  @IsOptional()
+  quant_page: number;
 
   @IsOptional()
   data_inicial: string; // "2023-08-14T23:59:00Z"
@@ -23,7 +27,7 @@ export class BookDTO {
   status: string;
 
   @IsOptional()
-  avaliacao: string;
+  tipo: string;
 
   @IsOptional()
   id_user?: number;
